@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
+import Login from './Login'; // Import the Login component
+
 
 function App() {
   const [inputText, setInputText] = useState('');
@@ -9,6 +11,11 @@ function App() {
   const [isAccordionOpen, setIsAccordionOpen] = useState(false);
   const [email, setEmail] = useState('');
   const [emailError, setEmailError] = useState('');
+  const [showLogin, setShowLogin] = useState(false); // State to toggle between pages
+
+  const toggleLogin = () => {
+    setShowLogin(!showLogin);
+  };
 
   // Email validation function
   const validateEmail = (e) => {
@@ -27,9 +34,21 @@ function App() {
     <div className="App">
       <header data-testid="header">
         <h1 data-testid="header-title">Demo Testing Page</h1>
+        <button onClick={toggleLogin} data-testid="toggle-login-button">
+          {showLogin ? 'Go to Demo Page' : 'Go to Login Page'}
+        </button>
         <p data-testid="header-description">This is a sample page to test various UI components.</p>
       </header>
 
+      {showLogin ? (
+        <Login />
+      ) : (
+        // Existing demo content goes here
+        <div>
+          {/* Existing demo components */}
+          {/* ... */}
+        </div>
+      )}
       {/* Buttons */}
       <section>
         <h2>Buttons</h2>
